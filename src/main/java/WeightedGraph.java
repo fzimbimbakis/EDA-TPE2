@@ -30,40 +30,47 @@ public class WeightedGraph<T>{
         nodes.values().forEach(Node::unmark);
     }
 
-    public int getCheapestPrice(T src, T dst, int k){
+    public int getCheapestPrice(T src, T dst, int maxEscalas){
         unmarkAllNodes();
         nodes.values().forEach(node -> node.cost = Integer.MAX_VALUE);
 
         PriorityQueue<PqNode> queue = new PriorityQueue<>();
+
         Node origen=nodes.get(src);
         Node destino=nodes.get(dst);
+
         if(origen==null || destino==null)
             return -1;
-        // Agrego el src
+
         origen.cost=0;
+        // Agrego el src
         queue.add(new PqNode(origen, origen.cost, -1));
        // int maxEscalas = Math.min(nodes.size(), k);
 //        for (int i = 0; i <= maxEscalas; i++) {
         while (!queue.isEmpty()){
-            PqNode node = queue.remove();
-            if(node.node.equals(destino))
+            PqNode pqNode = queue.remove();
+
+            if(pqNode.node.equals(destino))//si ya lo encuentro, su precio es el minimo posible
                 return destino.cost;
-            if(node.node.marked)
+
+            if(pqNode.node.marked)
                 continue;
+
+            pqNode.node.mark();
             // Recorro las aristas
-            if((node.escalas+1)<=k){
-                for (Edge edge : node.node.edges) {
+            if((pqNode.escalas+1)<=maxEscalas){
+                for (Edge edge : pqNode.node.edges) {
                     // Actualizo
-                    edge.targetNode.cost = Math.min(node.cost + edge.weight,edge.targetNode.cost);
+                    edge.targetNode.cost = Math.min(pqNode.cost + edge.weight,edge.targetNode.cost);
                     // Marco y mando a queue2 si no esta marcado.
 //                   if(!edge.targetNode.marked){
 //                        edge.targetNode.mark();
-                    queue.add(new PqNode(edge.targetNode, edge.targetNode.cost, node.escalas+1));
+
+                    queue.add(new PqNode(edge.targetNode, edge.targetNode.cost, pqNode.escalas+1));
 //                    }
                 }
                 //node.node.mark();
             }
-            node.node.mark();
         }
 //            queue1 = queue2;
 //            queue2 = new PriorityQueue<>();
@@ -77,7 +84,6 @@ public class WeightedGraph<T>{
         Set<Edge> edges;
         boolean marked;
         int cost;
-//        int distance;
 
         public Node(T label) {
             this.label = label;
