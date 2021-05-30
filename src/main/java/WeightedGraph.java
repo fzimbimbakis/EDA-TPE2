@@ -32,29 +32,6 @@ public class WeightedGraph<T>{
         nodes.values().forEach(Node::unmark);
     }
 
-    public void printDijkstra(T startingLabel) {
-        unmarkAllNodes();
-        nodes.values().forEach(node -> node.cost = Integer.MAX_VALUE);
-
-        PriorityQueue<PqNode> queue = new PriorityQueue<>();
-        queue.add(new PqNode(nodes.get(startingLabel), 0));
-
-        while (!queue.isEmpty()) {
-            PqNode pqNode = queue.remove();
-            if (pqNode.node.marked) continue;
-            pqNode.node.mark();
-            System.out.println(pqNode.node.label + ": " + pqNode.cost);
-
-            for (Edge edge : pqNode.node.edges) {
-                int targetNodeCost = pqNode.cost + edge.weight;
-                if (targetNodeCost < edge.targetNode.cost) {
-                    edge.targetNode.cost = targetNodeCost;
-                    queue.add(new PqNode(edge.targetNode, targetNodeCost));
-                }
-            }
-        }
-    }
-
     public int getCheapestPrice(T src, T dst, int k){
         unmarkAllNodes();
         nodes.values().forEach(node -> node.cost = Integer.MAX_VALUE);
@@ -68,7 +45,7 @@ public class WeightedGraph<T>{
 
         for (int i = 0; i <= k; i++) {
             while (!queue1.isEmpty()){
-                PqNode node = queue1.poll();
+                PqNode node = queue1.remove();
                 // Recorro las aristas
                 for (Edge edge : node.node.edges) {
                     // Actualizo
@@ -79,9 +56,11 @@ public class WeightedGraph<T>{
                         queue2.add(new PqNode(edge.targetNode, edge.targetNode.cost));
                     }
                 }
-                queue1 = queue2;
-                queue2 = new PriorityQueue<>();
+                //queue1 = queue2;
+                //queue2 = new PriorityQueue<>();
             }
+            queue1 = queue2;
+            queue2 = new PriorityQueue<>();
         }
 
       return nodes.get(dst).cost==Integer.MAX_VALUE? -1:nodes.get(dst).cost;

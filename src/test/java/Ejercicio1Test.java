@@ -86,7 +86,31 @@ class Ejercicio1Test {
     int ans=Ejercicio1.findCheapestPrice(3,flights,0,2,0);
     assertEquals(100, ans);
 
+    ans=Ejercicio1.findCheapestPrice(3,flights,0,2,1);
+    assertEquals(50,ans);
+    }
+
+    @Test
+    void testMaxEscala(){
+      int[][] flights = new int[][]{
+              {0, 1, 100},
+              {2, 1, 200},
+              {0, 2, 10},
+              {2,3,10},
+              {3,4,50},
+              {4,1,20}
+      };
+
+      int ans=Ejercicio1.findCheapestPrice(5,flights,0,1,3);
+      assertEquals(90, ans);
+
+      ans=Ejercicio1.findCheapestPrice(5,flights,0,1,2);
+      assertEquals(100, ans);
 
     }
+
+
+
+
 
 }
