@@ -101,12 +101,11 @@ class Ejercicio1Test {
               {4,1,20}
       };
 
-      int ans=Ejercicio1.findCheapestPrice(5,flights,0,1,3);
-      assertEquals(90, ans);
+      assertEquals(90, Ejercicio1.findCheapestPrice(5,flights,0,1,3));
 
-      ans=Ejercicio1.findCheapestPrice(5,flights,0,1,2);
-      assertEquals(100, ans);
+      assertEquals(100, Ejercicio1.findCheapestPrice(5,flights,0,1,2));
 
+      assertEquals(0, Ejercicio1.findCheapestPrice(5,flights,0,0,2));
     }
 
     @Test

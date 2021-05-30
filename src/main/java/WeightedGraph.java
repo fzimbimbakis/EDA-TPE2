@@ -38,10 +38,11 @@ public class WeightedGraph<T>{
 
         PriorityQueue<PqNode> queue1 = new PriorityQueue<>();
         PriorityQueue<PqNode> queue2 = new PriorityQueue<>();
-
+        Node firstNode=nodes.get(src);
         // Agrego el src
-        queue1.add(new PqNode(nodes.get(src), 0));
-        nodes.get(src).mark();
+        firstNode.cost=0;
+        queue1.add(new PqNode(firstNode, firstNode.cost));
+        firstNode.mark();
         int maxEscalas = Math.min(nodes.size(), k);
         for (int i = 0; i <= maxEscalas; i++) {
             while (!queue1.isEmpty()){
@@ -93,10 +94,6 @@ public class WeightedGraph<T>{
             return Objects.equals(label, node.label);
         }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(label);
-        }
     }
 
     class Edge {
