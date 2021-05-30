@@ -42,8 +42,8 @@ public class WeightedGraph<T>{
         // Agrego el src
         queue1.add(new PqNode(nodes.get(src), 0));
         nodes.get(src).mark();
-
-        for (int i = 0; i <= k; i++) {
+        int maxEscalas = Math.min(nodes.size(), k);
+        for (int i = 0; i <= maxEscalas; i++) {
             while (!queue1.isEmpty()){
                 PqNode node = queue1.remove();
                 // Recorro las aristas
@@ -56,8 +56,6 @@ public class WeightedGraph<T>{
                         queue2.add(new PqNode(edge.targetNode, edge.targetNode.cost));
                     }
                 }
-                //queue1 = queue2;
-                //queue2 = new PriorityQueue<>();
             }
             queue1 = queue2;
             queue2 = new PriorityQueue<>();

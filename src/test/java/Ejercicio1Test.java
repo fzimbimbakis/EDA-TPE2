@@ -8,14 +8,14 @@ class Ejercicio1Test {
   @Test
   void performanceTest() {
     int[][] flights = new int[][] {
-        {11,12,74},//
-        {1,8,91},//
-        {4,6,13},//
+        {11,12,74},
+        {1,8,91},
+        {4,6,13},
         {7,6,39},
         {5,12,8},
-        {0,12,54},//
+        {0,12,54},
         {8,4,32},
-        {0,11,4},//
+        {0,11,4},
         {4,0,91},
         {11,7,64},
         {6,3,88},
@@ -48,7 +48,7 @@ class Ejercicio1Test {
         {12,2,100},
         {6,9,53},
         {7,4,90},
-        {0,5,43},//
+        {0,5,43},
         {11,2,52},
         {11,8,50},
         {12,4,38},
@@ -59,7 +59,7 @@ class Ejercicio1Test {
         {12,0,26},
         {10,5,38},
         {12,8,50},
-        {0,2,77},//
+        {0,2,77},
         {11,0,13},
         {9,10,76},
         {2,6,67},
@@ -109,7 +109,25 @@ class Ejercicio1Test {
 
     }
 
+    @Test
+    void test(){
+      int[][] flights = new int[][]{
+              {0,2,4},
+              {0,1,2},
+              {1,4,6},
+              {2,4,2},
+              {2,6,1},
+              {3,4,1},
+              {4,6,2},
+              {5,4,4}
+      };
 
+//      assertEquals(-1,Ejercicio1.findCheapestPrice(7,flights,4,2,0));
+//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
+//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
+//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
+//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
+    }
 
 
 
