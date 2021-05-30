@@ -4,12 +4,12 @@ public class WeightedGraph<T>{
 
     private final boolean isDirected;
     Map<T, Node> nodes;
-    int maxDistnace;
+    int maxDistance;
 
-    public WeightedGraph(boolean isDirected, int maxDistnace) {
+    public WeightedGraph(boolean isDirected, int maxDistance) {
         this.isDirected = isDirected;
         nodes = new HashMap<>();
-        this.maxDistnace=maxDistnace;
+        this.maxDistance=maxDistance;
     }
 
     void addNode(T label) {
@@ -53,6 +53,39 @@ public class WeightedGraph<T>{
                 }
             }
         }
+    }
+
+    public int getCheapestPrice(T src, T dst, int k){
+        unmarkAllNodes();
+        nodes.values().forEach(node -> node.cost = Integer.MAX_VALUE);
+
+        PriorityQueue<PqNode> queue1 = new PriorityQueue<>();
+        PriorityQueue<PqNode> queue2 = new PriorityQueue<>();
+
+        // Agrego el src
+        queue1.add(new PqNode(nodes.get(src), 0));
+        nodes.get(src).mark();
+
+        for (int i = 0; i <= k; i++) {
+            while (!queue1.isEmpty()){
+                PqNode node = queue1.poll();
+                // Recorro las aristas
+                for (Edge edge : node.node.edges) {
+                    // Actualizo
+                    edge.targetNode.cost = Math.min(node.cost + edge.weight,edge.targetNode.cost);
+                    // Marco y mando a queue2 si no esta marcado.
+                    if(!edge.targetNode.marked){
+                        edge.targetNode.mark();
+                        queue2.add(new PqNode(edge.targetNode, edge.targetNode.cost));
+                    }
+                }
+                queue1 = queue2;
+                queue2 = new PriorityQueue<>();
+            }
+        }
+
+      return nodes.get(dst).cost==Integer.MAX_VALUE? -1:nodes.get(dst).cost;
+
     }
 
     class Node {

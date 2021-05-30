@@ -17,9 +17,7 @@ public class Ejercicio1 {
         graph.addEdge(flights[i][ORIGEN],flights[i][DESTINO],flights[i][PRECIO]);
     }
 
-
-
-    return -1;
+    return graph.getCheapestPrice(src,dst,k);
   }
 
 }
