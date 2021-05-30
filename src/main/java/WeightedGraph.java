@@ -42,10 +42,12 @@ public class WeightedGraph<T>{
         // Agrego el src
         origen.cost=0;
         queue.add(new PqNode(origen, origen.cost, -1));
-        int maxEscalas = Math.min(nodes.size(), k);
+       // int maxEscalas = Math.min(nodes.size(), k);
 //        for (int i = 0; i <= maxEscalas; i++) {
         while (!queue.isEmpty()){
             PqNode node = queue.remove();
+            if(node.node.equals(destino))
+                return destino.cost;
             if(node.node.marked)
                 continue;
             // Recorro las aristas
@@ -59,13 +61,15 @@ public class WeightedGraph<T>{
                     queue.add(new PqNode(edge.targetNode, edge.targetNode.cost, node.escalas+1));
 //                    }
                 }
-                node.node.mark();
+                //node.node.mark();
             }
+            node.node.mark();
         }
 //            queue1 = queue2;
 //            queue2 = new PriorityQueue<>();
 //        }
-      return destino.cost==Integer.MAX_VALUE? -1:destino.cost;
+        return -1;
+      //return destino.cost==Integer.MAX_VALUE? -1:destino.cost;
     }
 
     class Node {
@@ -93,7 +97,7 @@ public class WeightedGraph<T>{
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Node node = (Node) o;
-            return Objects.equals(label, node.label);
+            return Objects.equals(node.label,label);
         }
 
     }
