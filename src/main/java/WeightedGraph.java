@@ -37,30 +37,33 @@ public class WeightedGraph<T>{
         nodes.values().forEach(node -> node.cost = Integer.MAX_VALUE);
 
         PriorityQueue<PqNode> queue1 = new PriorityQueue<>();
-        PriorityQueue<PqNode> queue2 = new PriorityQueue<>();
         Node firstNode=nodes.get(src);
         // Agrego el src
         firstNode.cost=0;
-        queue1.add(new PqNode(firstNode, firstNode.cost));
-        firstNode.mark();
+        queue1.add(new PqNode(firstNode, firstNode.cost, -1));
         int maxEscalas = Math.min(nodes.size(), k);
-        for (int i = 0; i <= maxEscalas; i++) {
+//        for (int i = 0; i <= maxEscalas; i++) {
             while (!queue1.isEmpty()){
                 PqNode node = queue1.remove();
+                if(node.node.marked)
+                    continue;
                 // Recorro las aristas
+                if((node.escalas+1)<=k){
                 for (Edge edge : node.node.edges) {
                     // Actualizo
                     edge.targetNode.cost = Math.min(node.cost + edge.weight,edge.targetNode.cost);
                     // Marco y mando a queue2 si no esta marcado.
-                    if(!edge.targetNode.marked){
-                        edge.targetNode.mark();
-                        queue2.add(new PqNode(edge.targetNode, edge.targetNode.cost));
-                    }
+//                    if(!edge.targetNode.marked){
+//                        edge.targetNode.mark();
+                        queue1.add(new PqNode(edge.targetNode, edge.targetNode.cost, node.escalas+1));
+//                    }
+                }
+                node.node.mark();
                 }
             }
-            queue1 = queue2;
-            queue2 = new PriorityQueue<>();
-        }
+//            queue1 = queue2;
+//            queue2 = new PriorityQueue<>();
+//        }
 
       return nodes.get(dst).cost==Integer.MAX_VALUE? -1:nodes.get(dst).cost;
 
@@ -71,7 +74,7 @@ public class WeightedGraph<T>{
         Set<Edge> edges;
         boolean marked;
         int cost;
-        int distance;
+//        int distance;
 
         public Node(T label) {
             this.label = label;
@@ -109,10 +112,12 @@ public class WeightedGraph<T>{
     class PqNode implements Comparable<PqNode> {
         Node node;
         int cost;
+        int escalas;
 
-        public PqNode(Node node, int cost) {
+        public PqNode(Node node, int cost, int escalas) {
             this.node = node;
             this.cost = cost;
+            this.escalas = escalas;
         }
 
         @Override

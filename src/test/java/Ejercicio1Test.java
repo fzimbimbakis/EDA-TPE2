@@ -110,22 +110,24 @@ class Ejercicio1Test {
 
     @Test
     void test(){
+//      int[][] flights = new int[][]{
+//              {0,2,4},
+//              {0,1,2},
+//              {1,4,6},
+//              {2,4,2},
+//              {2,6,1},
+//              {3,4,1},
+//              {4,6,2},
+//              {5,4,4}
+//      };
       int[][] flights = new int[][]{
-              {0,2,4},
-              {0,1,2},
-              {1,4,6},
-              {2,4,2},
-              {2,6,1},
-              {3,4,1},
-              {4,6,2},
-              {5,4,4}
+              {0,1,1},
+              {1,2,1},
+              {0,3,6},
+              {2,3,1},
+              {3,4,5},
       };
-
-//      assertEquals(-1,Ejercicio1.findCheapestPrice(7,flights,4,2,0));
-//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
-//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
-//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
-//      assertEquals(Ejercicio1.findCheapestPrice(7,flights,,));
+      assertEquals(8, Ejercicio1.findCheapestPrice(5,flights,0,4,3));
     }
 
 
