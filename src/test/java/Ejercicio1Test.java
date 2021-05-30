@@ -131,5 +131,24 @@ class Ejercicio1Test {
     }
 
 
+  @Test
+  void testInexistentNode(){
+    int[][] flights = new int[][]{
+            {0, 1, 100},
+            {2, 1, 200},
+            {0, 2, 10},
+            {2,3,10},
+            {3,4,50},
+            {4,1,20}
+    };
+
+    assertEquals(-1, Ejercicio1.findCheapestPrice(5,flights,5,1,3));
+
+    assertEquals(-1, Ejercicio1.findCheapestPrice(5,flights,3,6,2));
+
+    assertEquals(-1, Ejercicio1.findCheapestPrice(5,flights,5,6,2));
+  }
+
+
 
 }
