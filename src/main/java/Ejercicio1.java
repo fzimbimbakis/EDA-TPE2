@@ -7,7 +7,7 @@ public class Ejercicio1 {
           PRECIO=2;
 
   static int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-    WeightedGraph<Integer> graph=new WeightedGraph<>(true,k);
+    WeightedGraph<Integer> graph=new WeightedGraph<>(true);
 
     for(int i=0; i < n ; i++){//cargo nodos
       graph.addNode(i);
