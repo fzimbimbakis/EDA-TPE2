@@ -45,12 +45,10 @@ public class WeightedGraph<T>{
         origen.cost=0;
         // Agrego el src
         queue.add(new PqNode(origen, origen.cost, -1));
-       // int maxEscalas = Math.min(nodes.size(), k);
-//        for (int i = 0; i <= maxEscalas; i++) {
         while (!queue.isEmpty()){
             PqNode pqNode = queue.remove();
 
-            if(pqNode.node.equals(destino))//si ya lo encuentro, su precio es el minimo posible
+            if(pqNode.node.equals(destino))     //si ya lo encuentro, su precio es el minimo posible
                 return destino.cost;
 
             if(pqNode.node.marked)
@@ -60,23 +58,14 @@ public class WeightedGraph<T>{
             // Recorro las aristas
             if((pqNode.escalas+1)<=maxEscalas){
                 for (Edge edge : pqNode.node.edges) {
-                    // Actualizo
+                    // Actualizo cost
                     edge.targetNode.cost = Math.min(pqNode.cost + edge.weight,edge.targetNode.cost);
-                    // Marco y mando a queue2 si no esta marcado.
-//                   if(!edge.targetNode.marked){
-//                        edge.targetNode.mark();
-
+                    // Agrego a la queue
                     queue.add(new PqNode(edge.targetNode, edge.targetNode.cost, pqNode.escalas+1));
-//                    }
                 }
-                //node.node.mark();
             }
         }
-//            queue1 = queue2;
-//            queue2 = new PriorityQueue<>();
-//        }
         return -1;
-      //return destino.cost==Integer.MAX_VALUE? -1:destino.cost;
     }
 
     class Node {
@@ -99,6 +88,7 @@ public class WeightedGraph<T>{
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;

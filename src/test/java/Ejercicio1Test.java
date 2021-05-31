@@ -102,6 +102,7 @@ class Ejercicio1Test {
       };
 
       assertEquals(90, Ejercicio1.findCheapestPrice(5,flights,0,1,3));
+      assertEquals(90, Ejercicio1.findCheapestPrice(5,flights,0,1,800));
 
       assertEquals(100, Ejercicio1.findCheapestPrice(5,flights,0,1,2));
 
@@ -109,30 +110,21 @@ class Ejercicio1Test {
     }
 
     @Test
-    void test(){
-//      int[][] flights = new int[][]{
-//              {0,2,4},
-//              {0,1,2},
-//              {1,4,6},
-//              {2,4,2},
-//              {2,6,1},
-//              {3,4,1},
-//              {4,6,2},
-//              {5,4,4}
-//      };
+    void testLongPathLowestPrice(){
       int[][] flights = new int[][]{
               {0,1,1},
               {1,2,1},
-              {0,3,6},
+              {0,3,100},
               {2,3,1},
               {3,4,5},
       };
       assertEquals(8, Ejercicio1.findCheapestPrice(5,flights,0,4,3));
+      assertEquals(105, Ejercicio1.findCheapestPrice(5,flights,0,4,1));
     }
 
 
   @Test
-  void testInexistentNode(){
+  void testNonexistentNode(){
     int[][] flights = new int[][]{
             {0, 1, 100},
             {2, 1, 200},
