@@ -31,16 +31,17 @@ public class WeightedGraph<T>{
     }
 
     public int getCheapestPrice(T src, T dst, int maxEscalas){
-        unmarkAllNodes();
-        nodes.values().forEach(node -> node.cost = Integer.MAX_VALUE);
-
-        PriorityQueue<PqNode> queue = new PriorityQueue<>();
 
         Node origen=nodes.get(src);
         Node destino=nodes.get(dst);
 
-        if(origen==null || destino==null)
-            return -1;
+        // Chequeo de parámetros
+        if(maxEscalas<0||origen==null || destino==null)
+            throw new IllegalArgumentException();
+        unmarkAllNodes();
+        nodes.values().forEach(node -> node.cost = Integer.MAX_VALUE);
+
+        PriorityQueue<PqNode> queue = new PriorityQueue<>();
 
         origen.cost=0;
         // Agrego el src

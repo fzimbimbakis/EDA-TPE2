@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class Ejercicio1Test {
 
@@ -133,12 +132,21 @@ class Ejercicio1Test {
             {3,4,50},
             {4,1,20}
     };
-
-    assertEquals(-1, Ejercicio1.findCheapestPrice(5,flights,5,1,3));
-
-    assertEquals(-1, Ejercicio1.findCheapestPrice(5,flights,3,6,2));
-
-    assertEquals(-1, Ejercicio1.findCheapestPrice(5,flights,5,6,2));
+    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,5,1,-1));
+    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,3,6,-1));
+    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,5,6,-1));
+  }
+  @Test
+  void testIllegalArguments(){
+    int[][] flights = new int[][]{
+            {0, 1, 100},
+            {2, 1, 200},
+            {0, 2, 10},
+            {2,3,10},
+            {3,4,50},
+            {4,1,20}
+    };
+    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,3,1,-1));
   }
 
 
