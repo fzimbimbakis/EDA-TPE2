@@ -132,9 +132,9 @@ class Ejercicio1Test {
             {3,4,50},
             {4,1,20}
     };
-    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,5,1,-1));
-    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,3,6,-1));
-    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,5,6,-1));
+    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,5,1,3));
+    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,3,6,10));
+    assertThrows(IllegalArgumentException.class, ()-> Ejercicio1.findCheapestPrice(5,flights,5,6,1000));
   }
   @Test
   void testIllegalArguments(){
